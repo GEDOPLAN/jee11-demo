@@ -6,8 +6,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-import jakarta.validation.ConstraintViolationException;
-import jakarta.ws.rs.WebApplicationException;
 
 import java.util.List;
 
@@ -18,7 +16,8 @@ public class PersonRepository {
 
   public List<Person> findAll() {
     return entityManager.createQuery("SELECT p FROM Person p", Person.class).getResultList();
-//    return entityManager.createQuery(Person_.QUERY_PERSON_FIND_ALL, Person.class).getResultList();
+//    return entityManager.createQuery("FROM Person", Person.class).getResultList();
+//    return entityManager.createNamedQuery(Person_.QUERY_PERSON_FIND_ALL, Person.class).getResultList();
   }
 
   @Transactional
