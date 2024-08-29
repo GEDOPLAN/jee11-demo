@@ -1,0 +1,26 @@
+GET http://localhost:8080/person
+Content-Type: */*
+
+###
+POST http://localhost:8080/person
+Content-Type: application/json
+
+{
+  "name": "Markus"
+}
+
+###
+POST http://localhost:8080/person/check
+Content-Type: application/json
+
+{
+  "name": "Markus"
+}
+
+###
+POST http://localhost:8080/person/validate
+Content-Type: application/json
+
+{
+  "name": "Markus"
+}

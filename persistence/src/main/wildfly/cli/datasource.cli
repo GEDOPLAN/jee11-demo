@@ -1,0 +1,1 @@
+/subsystem=datasources/data-source=seminar:add(jndi-name=java:/jdbc/jee11-demo, connection-url="jdbc:h2:~/h2/jee11-demo;AUTO_SERVER=TRUE", driver-name=h2, user-name=demo, password=demo)

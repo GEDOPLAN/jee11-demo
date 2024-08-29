@@ -1,0 +1,4 @@
+/subsystem=logging/root-logger=ROOT:remove-handler(name=FILE)
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=level, value=ALL)
+/subsystem=logging/periodic-rotating-file-handler=FILE:remove
+/subsystem=logging/logger=de.gedoplan.seminar:add(level=DEBUG)

@@ -9,11 +9,48 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
+	<packaging>war</packaging>
+
 	<artifactId>persistence</artifactId>
 
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<hibernate.version>7.0.0.Beta1</hibernate.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-jar-maven-plugin</artifactId>
+				<configuration>
+					<cli-sessions>
+						<cli-session>
+							<script-files>
+								<script>src/main/wildfly/cli/datasource.cli</script>
+								<script>src/main/wildfly/cli/logging.cli</script>
+								<script>src/main/wildfly/cli/encoding.cli</script>
+							</script-files>
+						</cli-session>
+					</cli-sessions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
