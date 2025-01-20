@@ -11,20 +11,28 @@
 
 	<packaging>war</packaging>
 
-	<artifactId>persistence</artifactId>
+	<artifactId>jee11-persistence</artifactId>
 
 	<properties>
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<hibernate.version>7.0.0.Beta1</hibernate.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-web-api</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-processor</artifactId>
 			<version>${hibernate.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
@@ -35,6 +43,19 @@
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-jar-maven-plugin</artifactId>
 				<configuration>
+					<feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
+					<layers>
+						<layer>base-server</layer>
+						<layer>core-tools</layer>
+						<layer>logging</layer>
+						<layer>web-console</layer>
+						<layer>web-server</layer>
+						<layer>jaxrs</layer>
+						<layer>jpa</layer>
+						<layer>h2-datasource</layer>
+						<layer>bean-validation</layer>
+						<layer>ee-concurrency</layer>
+					</layers>
 					<cli-sessions>
 						<cli-session>
 							<script-files>
@@ -44,6 +65,15 @@
 							</script-files>
 						</cli-session>
 					</cli-sessions>
+					<excluded-layers>
+						<layer>deployment-scanner</layer>
+					</excluded-layers>
+					<plugin-options>
+						<ignore-not-excluded-layers>true</ignore-not-excluded-layers>
+						<jboss-maven-dist/>
+					</plugin-options>
+					<hollow-jar>true</hollow-jar>
+					<output-file-name>wildfly-bootable.jar</output-file-name>
 				</configuration>
 			</plugin>
 		</plugins>

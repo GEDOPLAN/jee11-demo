@@ -6,8 +6,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>persistence</module>
-		<module>concurrency</module>
+		<module>jee11-concurrency</module>
+		<module>jee11-persistence</module>
+		<module>jee11-virtual-threads</module>
 	</modules>
 
 	<groupId>de.gedoplan.showcase</groupId>
@@ -15,59 +16,66 @@
 	<version>1.0-SNAPSHOT</version>
 
 	<properties>
-		<maven.compiler.source>21</maven.compiler.source>
-		<maven.compiler.target>21</maven.compiler.target>
+		<java.code.version>21</java.code.version>
+		<maven.compiler.source>${java.code.version}</maven.compiler.source>
+		<maven.compiler.target>${java.code.version}</maven.compiler.target>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jakartaee.version>11.0.0-M4</jakartaee.version>
-		<wildfly.version>33.0.1.Final</wildfly.version>
+
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+
+		<skipTests>true</skipTests>
+
+		<wildfly.version>35.0.0.Final</wildfly.version>
 		<wildfly.bootable.jar.version>11.0.2.Final</wildfly.bootable.jar.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>jakarta.platform</groupId>
-			<artifactId>jakarta.jakartaee-web-api</artifactId>
-			<version>11.0.0-M4</version>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.32</version>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>jakarta.platform</groupId>
+				<artifactId>jakarta.jakartaee-api</artifactId>
+				<version>10.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>jakarta.platform</groupId>
+				<artifactId>jakarta.jakartaee-web-api</artifactId>
+				<version>11.0.0-M4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse.microprofile</groupId>
+				<artifactId>microprofile</artifactId>
+				<version>7.0</version>
+				<type>pom</type>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.32</version>
+				<scope>compile</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
+		<defaultGoal>package</defaultGoal>
 		<finalName>${project.artifactId}</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
 					<groupId>org.wildfly.plugins</groupId>
 					<artifactId>wildfly-jar-maven-plugin</artifactId>
-					<version>${wildfly.bootable.jar.version}</version>
+					<version>11.0.2.Final</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.wildfly.plugins</groupId>
-				<artifactId>wildfly-jar-maven-plugin</artifactId>
-				<configuration>
-					<feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
-					<layers>
-						<layer>base-server</layer>
-						<layer>core-tools</layer>
-						<layer>logging</layer>
-						<layer>web-console</layer>
-						<layer>web-server</layer>
-						<layer>jaxrs</layer>
-						<layer>jpa</layer>
-						<layer>h2-datasource</layer>
-						<layer>bean-validation</layer>
-						<layer>ee-concurrency</layer>
-					</layers>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 </project>

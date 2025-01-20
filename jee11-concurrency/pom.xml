@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.gedoplan.showcase</groupId>
+		<artifactId>jee11-demo</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<packaging>war</packaging>
+
+	<artifactId>jee11-concurrency</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-web-api</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-jar-maven-plugin</artifactId>
+				<configuration>
+					<feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
+					<layers>
+						<layer>datasources-web-server</layer>
+						<layer>logging</layer>
+						<layer>jaxrs</layer>
+						<layer>bean-validation</layer>
+						<layer>ee-concurrency</layer>
+					</layers>
+					<excluded-layers>
+						<layer>deployment-scanner</layer>
+					</excluded-layers>
+					<plugin-options>
+						<ignore-not-excluded-layers>true</ignore-not-excluded-layers>
+						<jboss-maven-dist/>
+					</plugin-options>
+					<hollow-jar>true</hollow-jar>
+					<output-file-name>wildfly-bootable.jar</output-file-name>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
