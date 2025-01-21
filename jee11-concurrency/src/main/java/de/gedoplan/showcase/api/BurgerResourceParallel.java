@@ -10,6 +10,7 @@ import de.gedoplan.showcase.service.MeatService;
 import de.gedoplan.showcase.service.MiseEnPlaceService;
 import de.gedoplan.showcase.service.OvenService;
 import de.gedoplan.showcase.service.StoveService;
+import de.gedoplan.showcase.service.concurrency.UseVirtualIfSupported;
 import de.gedoplan.showcase.util.ThreadUtil;
 
 import java.util.List;
@@ -33,10 +34,10 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 @Path("par/burger")
-@ManagedExecutorDefinition(name = "java:comp/Executor", virtual = true)
 public class BurgerResourceParallel extends AbstractBurgerResource {
 
-  @Resource(lookup = "java:comp/Executor")
+//  @Resource(lookup = "java:comp/Executor")
+  @Inject @UseVirtualIfSupported
   ManagedExecutorService executor;
 
   @GET
