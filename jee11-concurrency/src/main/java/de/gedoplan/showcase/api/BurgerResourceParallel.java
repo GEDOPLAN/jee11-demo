@@ -12,14 +12,9 @@ import de.gedoplan.showcase.service.OvenService;
 import de.gedoplan.showcase.service.StoveService;
 import de.gedoplan.showcase.util.ThreadUtil;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
 
 import jakarta.annotation.Resource;
 import jakarta.enterprise.concurrent.ManagedExecutorDefinition;
@@ -37,38 +32,15 @@ import org.apache.commons.logging.Log;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
-@Path("vt/burger")
+@Path("par/burger")
 @ManagedExecutorDefinition(name = "java:comp/Executor", virtual = true)
-public class BurgerResourceVirtualThread {
-
-  @Inject
-  @RestClient
-  DoughService doughService;
-
-  @Inject
-  @RestClient
-  OvenService ovenService;
-
-  @Inject
-  @RestClient
-  MeatService meatService;
-
-  @Inject
-  @RestClient
-  StoveService stoveService;
-
-  @Inject
-  MiseEnPlaceService miseEnPlaceService;
+public class BurgerResourceParallel extends AbstractBurgerResource {
 
   @Resource(lookup = "java:comp/Executor")
   ManagedExecutorService executor;
 
-  @Inject
-  Log logger;
-
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  //  @RunOnVirtualThread
   public List<String> getBurger(@QueryParam("bun") @DefaultValue("WHEAT") DoughType bunType, @QueryParam("patty") @DefaultValue("BEEF") PattyType pattyType)
     throws ExecutionException, InterruptedException {
 
@@ -94,28 +66,5 @@ public class BurgerResourceVirtualThread {
     return parts;
   }
 
-  private Dough supplyBunDough(DoughType bunType) {
-    log("Get dough (" + bunType + ")");
-    return this.doughService.supplyBunDough(bunType, 50);
-  }
-
-  private Bun bakeBun(Dough dough) {
-    log("Bake bun (" + dough.getType() + ")");
-    return this.ovenService.bakeBun(dough);
-  }
-
-  private Patty supplyPattyMeat(String meatType) {
-    log("Get patty (" + meatType + ")");
-    return this.meatService.supplyPattyMeat(meatType, 200);
-  }
-
-  private Patty fryPattie(Patty patty) {
-    log("Fry pattie (" + patty.getType() + ")");
-    return this.stoveService.fryPattie(patty);
-  }
-
-  private void log(String message) {
-    this.logger.debug(message + " on " + (ThreadUtil.isVirtualThread() ? "virtual" : "platform") + " thread");
-  }
 
 }

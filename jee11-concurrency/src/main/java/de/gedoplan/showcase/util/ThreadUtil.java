@@ -13,4 +13,8 @@ public final class ThreadUtil {
     }
   }
 
+  public static String getKindOfThread() {
+    return isVirtualThread() ? "virtual" : "platform";
+  }
+
 }

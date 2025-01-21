@@ -27,29 +27,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 @Path("seq/burger")
-public class BurgerResourceSequential {
-
-  @Inject
-  @RestClient
-  DoughService doughService;
-
-  @Inject
-  @RestClient
-  OvenService ovenService;
-
-  @Inject
-  @RestClient
-  MeatService meatService;
-
-  @Inject
-  @RestClient
-  StoveService stoveService;
-
-  @Inject
-  MiseEnPlaceService miseEnPlaceService;
-
-  @Inject
-  Log logger;
+public class BurgerResourceSequential extends AbstractBurgerResource {
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -76,25 +54,5 @@ public class BurgerResourceSequential {
 
     this.logger.debug("----- Deliver burger ------------------");
     return parts;
-  }
-
-  private Dough supplyBunDough(DoughType bunType) {
-    this.logger.debug("Get dough (" + bunType + ")");
-    return this.doughService.supplyBunDough(bunType, 50);
-  }
-
-  private Bun bakeBun(Dough dough) {
-    this.logger.debug("Bake bun (" + dough.getType() + ")");
-    return this.ovenService.bakeBun(dough);
-  }
-
-  private Patty supplyPattyMeat(String meatType) {
-    this.logger.debug("Get patty (" + meatType + ")");
-    return this.meatService.supplyPattyMeat(meatType, 200);
-  }
-
-  private Patty fryPattie(Patty patty) {
-    this.logger.debug("Fry pattie (" + patty.getType() + ")");
-    return this.stoveService.fryPattie(patty);
   }
 }
