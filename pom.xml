@@ -8,7 +8,6 @@
 	<modules>
 		<module>jee11-concurrency</module>
 		<module>jee11-persistence</module>
-		<module>jee11-virtual-threads</module>
 	</modules>
 
 	<groupId>de.gedoplan.showcase</groupId>

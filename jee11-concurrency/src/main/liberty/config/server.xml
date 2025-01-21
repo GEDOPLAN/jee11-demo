@@ -12,17 +12,6 @@
 
 	<webApplication location="${app.location}" contextRoot="${app.context.root}"/>
 
-	<!--
-	<library id="h2JDBCLib">
-		<fileset dir="${shared.resource.dir}/" includes="h2*.jar" />
-	</library>
-
-	<dataSource id="DefaultDataSource">
-		<jdbcDriver libraryRef="h2JDBCLib" />
-		<properties URL="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE" password="sa" user="sa" />
-	</dataSource>
-  -->
-
-	<logging consoleLogLevel="INFO" isoDateFormat="true" traceSpecification="*=warning:de.gedoplan=fine" />
+	<logging consoleLogLevel="INFO" isoDateFormat="true" traceFileName="stdout" traceSpecification="*=warning:de.gedoplan=fine" />
 
 </server>
