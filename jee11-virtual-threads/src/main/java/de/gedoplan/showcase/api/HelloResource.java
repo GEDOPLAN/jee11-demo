@@ -21,6 +21,6 @@ public class HelloResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public String getHello() {
-    return "Hello, WildFly!";
+    return "Hello, Jakarta EE 11!";
   }
 }

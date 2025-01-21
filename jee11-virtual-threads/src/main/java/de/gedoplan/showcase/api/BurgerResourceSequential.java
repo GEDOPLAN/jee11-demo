@@ -71,7 +71,8 @@ public class BurgerResourceSequential {
       this.miseEnPlaceService.getCheese(),
       patty.toString(),
       this.miseEnPlaceService.getSalad(),
-      bun.getLowerHalf());
+      bun.getLowerHalf()
+    );
 
     this.logger.debug("----- Deliver burger ------------------");
     return parts;

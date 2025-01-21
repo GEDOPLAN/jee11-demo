@@ -15,6 +15,9 @@
 
   <properties>
     <java.code.version>21</java.code.version>
+
+    <version.openliberty-group>io.openliberty.beta</version.openliberty-group>
+    <version.openliberty-runtime>24.0.0.5-beta</version.openliberty-runtime>
   </properties>
 
   <dependencies>
@@ -64,6 +67,28 @@
           </cli-sessions>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>io.openliberty.tools</groupId>
+        <artifactId>liberty-maven-plugin</artifactId>
+        <version>3.10.3</version>
+        <configuration>
+          <assemblyArtifact>
+            <groupId>io.openliberty.beta</groupId>
+            <artifactId>openliberty-runtime</artifactId>
+            <version>25.0.0.1-beta</version>
+            <type>zip</type>
+          </assemblyArtifact>
+          <serverName>${project.artifactId}-server</serverName>
+          <bootstrapProperties>
+            <default.http.port>8080</default.http.port>
+            <default.https.port>8443</default.https.port>
+            <app.location>${project.artifactId}.war</app.location>
+            <app.context.root>/</app.context.root>
+          </bootstrapProperties>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
