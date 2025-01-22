@@ -16,3 +16,4 @@ A second alternative with a lower priority.
 +
 The injection in `GreetingResource` selects the service produced by `MyGreetingServiceProducer`.
 
+NOTE: Run the application with `mvn liberty:dev` or `mvn wildfly-jar:dev-watch`.

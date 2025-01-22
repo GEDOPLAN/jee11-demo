@@ -26,3 +26,6 @@ Not shown here: A schedule may be terminated by returning a completed `Completab
 
 CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
 
+NOTE: Run the application with `mvn liberty:dev`.
+
+

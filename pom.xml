@@ -26,8 +26,11 @@
 
 		<skipTests>true</skipTests>
 
+		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
+		<openliberty.version>25.0.0.1-beta</openliberty.version>
+
 		<wildfly.version>35.0.0.Final</wildfly.version>
-		<wildfly.bootable.jar.version>11.0.2.Final</wildfly.bootable.jar.version>
+		<wildfly.suffix>-preview</wildfly.suffix>
 	</properties>
 
 	<dependencyManagement>
@@ -71,11 +74,37 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>io.openliberty.tools</groupId>
+					<artifactId>liberty-maven-plugin</artifactId>
+					<version>3.10.3</version>
+				</plugin>
+				<plugin>
 					<groupId>org.wildfly.plugins</groupId>
 					<artifactId>wildfly-jar-maven-plugin</artifactId>
 					<version>11.0.2.Final</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>io.openliberty.tools</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<configuration>
+					<assemblyArtifact>
+						<groupId>${openliberty.groupId}</groupId>
+						<artifactId>openliberty-runtime</artifactId>
+						<version>${openliberty.version}</version>
+						<type>zip</type>
+					</assemblyArtifact>
+					<serverName>${project.artifactId}-server</serverName>
+					<bootstrapProperties>
+						<default.http.port>8080</default.http.port>
+						<default.https.port>8443</default.https.port>
+						<app.location>${project.artifactId}.war</app.location>
+						<app.context.root>/</app.context.root>
+					</bootstrapProperties>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

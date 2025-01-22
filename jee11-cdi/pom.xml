@@ -34,7 +34,7 @@
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-jar-maven-plugin</artifactId>
         <configuration>
-          <feature-pack-location>wildfly-preview@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
+          <feature-pack-location>wildfly${wildfly.suffix}@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
           <layers>
             <layer>jaxrs-server</layer>
             <layer>microprofile-platform</layer>
@@ -49,28 +49,6 @@
           </cli-sessions>
         </configuration>
       </plugin>
-
-      <plugin>
-        <groupId>io.openliberty.tools</groupId>
-        <artifactId>liberty-maven-plugin</artifactId>
-        <version>3.10.3</version>
-        <configuration>
-          <assemblyArtifact>
-            <groupId>io.openliberty.beta</groupId>
-            <artifactId>openliberty-runtime</artifactId>
-            <version>25.0.0.1-beta</version>
-            <type>zip</type>
-          </assemblyArtifact>
-          <serverName>${project.artifactId}-server</serverName>
-          <bootstrapProperties>
-            <default.http.port>8080</default.http.port>
-            <default.https.port>8443</default.https.port>
-            <app.location>${project.artifactId}.war</app.location>
-            <app.context.root>/</app.context.root>
-          </bootstrapProperties>
-        </configuration>
-      </plugin>
-
     </plugins>
   </build>
 </project>
