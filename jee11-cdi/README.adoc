@@ -1,0 +1,18 @@
+= New in JEE 11 / CDI 4.1
+
+@Priority on producer methods or fields::
+
+This allows global activation of a producer method or field declared as `@Alternative`.
++
+There are 3 `GreetingService` implementations in this demo application - all represented by a producer method:
++
+* `DefaultGreetingServiceProducer` +
+Plain producer with no special annotations. +
+This could come from some framework library.
+* `MyGreetingServiceProducer` +
+Alternative producer with medium priority.
+* `SomeOtherGreetingServiceProducer` +
+A second alternative with a lower priority.
++
+The injection in `GreetingResource` selects the service produced by `MyGreetingServiceProducer`.
+

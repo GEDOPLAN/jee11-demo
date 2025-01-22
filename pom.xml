@@ -6,6 +6,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>jee11-cdi</module>
 		<module>jee11-concurrency</module>
 		<module>jee11-persistence</module>
 	</modules>
