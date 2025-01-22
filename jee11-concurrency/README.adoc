@@ -1,0 +1,28 @@
+= New in JEE 11 / Concurrency 3.1
+
+Virtual threads in `ManagedExecutorService`::
+
+`@ManagedExecutorDefinition` can be used to declare managed executors using virtual threads. +
+If running on a JVM prior to 21, the `virtual` parameter is ignored. +
+Managed executors may be injected with `@Inject`, using qualifiers for selection.
++
+For demonstration a former GEDOPLAN Expertenkreis Java demo producing (virtual) burgers has now been implemented with JEE 11: +
+`BurgerResourceParallel` uses a `ManagedExecutor` defined by `@ManagedExecutorDefinition` on `ExecutorDefinitions`. +
+If run on a JVM 21+, virtual threads are used for the parallel tasks.
+
+Asynchronous methods::
+
+`@Asynchronous` has finally arrived in Concurrency - originating from the EJB spec and being misplaced in MicroProfile Fault Tolerance for a while. 
++
+`DeepThoughService` and `DeepThoughResource` are a simple demo.
+
+Scheduled asynchronous methods::
+
+`@Asynchronous` supports schedules - specifying when the method invocation shall take place.
++
+`TickerService` and `TickerResource` show the usage of `@Schedule`.
++
+Not shown here: A schedule may be terminated by returning a completed `CompletableFuture` object.
+
+CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
+
