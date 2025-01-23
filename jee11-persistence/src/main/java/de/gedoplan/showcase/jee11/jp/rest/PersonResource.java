@@ -4,21 +4,16 @@ import de.gedoplan.showcase.jee11.jp.model.Person;
 import de.gedoplan.showcase.jee11.jp.model.Status;
 import de.gedoplan.showcase.jee11.jp.repository.PersonRepository;
 import jakarta.inject.Inject;
-import jakarta.validation.ConstraintViolation;
+import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
-import jakarta.validation.Validator;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import lombok.extern.java.Log;
-import org.hibernate.query.sqm.spi.JdbcParameterBySqmParameterAccess;
 
-import java.time.Year;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.function.BiConsumer;
 
 @Log
@@ -26,6 +21,8 @@ import java.util.function.BiConsumer;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {
+  private static final String ERROR_HEADER = "Error-Message";
+
   // Injektion der UriInfo erfolgt nun über @Inject statt @Context
   @Inject
   UriInfo uriInfo;
@@ -56,12 +53,21 @@ public class PersonResource {
   }
 
   @POST
+  @Transactional
   public Response addPerson(Person person) {
     person.setStatus(Status.NEW);
     try {
       personRepository.save(person);
-    } catch (ConstraintViolationException exception) {
-      return createResponse(Response.status(Response.Status.BAD_REQUEST), exception.getConstraintViolations());
+    } catch (Exception exception) {
+      // Auf Fehler bei der Jakarta Validation reagieren
+      if (exception instanceof ConstraintViolationException) {
+        return createResponse(Response.status(Response.Status.BAD_REQUEST), (ConstraintViolationException) exception);
+      }
+      // Auf Fehler bei den SQL-Checks reagieren
+      if (exception instanceof org.hibernate.exception.ConstraintViolationException) {
+        return Response.status(Response.Status.BAD_REQUEST).header(ERROR_HEADER, ((org.hibernate.exception.ConstraintViolationException) exception).getConstraintName()).build();
+      }
+      return Response.status(Response.Status.BAD_REQUEST).header(ERROR_HEADER, exception.getLocalizedMessage()).build();
     }
     return Response.created(
             uriInfo
@@ -71,9 +77,9 @@ public class PersonResource {
         .build();
   }
 
-  private Response createResponse(Response.ResponseBuilder responseBuilder, Set<ConstraintViolation<?>> violations) {
+  private Response createResponse(Response.ResponseBuilder responseBuilder, ConstraintViolationException exception) {
     BiConsumer<String, String> addHeader = responseBuilder::header;
-    violations.forEach(violation -> addHeader.accept(violation.getPropertyPath().toString(), violation.getMessage()));
+    exception.getConstraintViolations().forEach(violation -> addHeader.accept(ERROR_HEADER, violation.getPropertyPath().toString() + " - " +  violation.getMessage()));
     return responseBuilder.build();
   }
 }

@@ -15,6 +15,7 @@ Content-Type: application/json
 
 {
   "name": "Markus",
+  "number": "2024.001",
   "birthday": "1899-01-23"
 }
 
