@@ -2,25 +2,36 @@ GET http://localhost:8080/person
 Content-Type: */*
 
 ###
+GET http://localhost:8080/person/Markus
+Content-Type: */*
+
+###
+GET http://localhost:8080/person/Markus/reg
+Content-Type: */*
+
+###
 POST http://localhost:8080/person
 Content-Type: application/json
 
 {
-  "name": "Markus"
+  "name": "Markus",
+  "birthday": "1899-01-23"
 }
 
 ###
-POST http://localhost:8080/person/check
+POST http://localhost:8080/person
 Content-Type: application/json
 
 {
-  "name": "Markus"
+  "birthday": "1973-05-31"
 }
 
 ###
-POST http://localhost:8080/person/validate
+POST http://localhost:8080/person
 Content-Type: application/json
 
 {
-  "name": "Markus"
+  "name": "Markus",
+  "number": "2024.0001",
+  "birthday": "1973-05-31"
 }

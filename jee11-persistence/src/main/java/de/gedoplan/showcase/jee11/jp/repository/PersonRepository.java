@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
+import java.time.Year;
 import java.util.List;
 
 @ApplicationScoped
@@ -16,8 +17,28 @@ public class PersonRepository {
 
   public List<Person> findAll() {
     return entityManager.createQuery("SELECT p FROM Person p", Person.class).getResultList();
-//    return entityManager.createQuery("FROM Person", Person.class).getResultList();
-//    return entityManager.createNamedQuery(Person_.QUERY_PERSON_FIND_ALL, Person.class).getResultList();
+  }
+
+  public List<Person> findAllShortSyntax() {
+    return entityManager.createQuery("FROM Person", Person.class).getResultList();
+  }
+
+  public List<Person> findAllTypeSave() {
+    return entityManager.createNamedQuery(Person_.QUERY_PERSON_FIND_ALL, Person.class).getResultList();
+  }
+
+  public Integer getRegistrationYear(String name) {
+    return entityManager
+        .createQuery("SELECT cast(left(p.number,4) as Integer) FROM Person p WHERE p.name = :name", Integer.class)
+        .setParameter("name", name)
+        .getSingleResultOrNull();
+  }
+
+  public Person findByName(String name) {
+    return entityManager
+        .createQuery("SELECT p FROM Person p WHERE p.name = :name", Person.class)
+        .setParameter("name", name)
+        .getSingleResultOrNull();
   }
 
   @Transactional
