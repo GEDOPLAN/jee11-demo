@@ -9,6 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -19,16 +22,52 @@ public class Person {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
 
+  @Column(comment = "The name of the person.")
   @NotNull
   @Size(min = 2)
   String name;
 
+//  @Enumerated(EnumType.STRING)
   Status status;
 
-//  @NotNull
+  @NotNull
+  String number;
+
+  @NotNull
   @PastOrPresent
   LocalDate birthday;
 
+  @Column(check = @CheckConstraint(name = "check_year", constraint = "\"YEAROFBIRTH\" >= 1900"))
+  Year yearOfBirth;
+
   @Valid
   Address address;
+
+  @OneToMany(mappedBy = Note_.PERSON)
+  List<Note> notes;
+
+  @PrePersist
+  void prePersist() {
+    yearOfBirth = Year.from(birthday);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    Person other = (Person) obj;
+    return Objects.equals(id, other.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
 }
