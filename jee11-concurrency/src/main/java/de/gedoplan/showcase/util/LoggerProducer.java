@@ -4,23 +4,22 @@ import java.lang.reflect.Member;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+import org.jboss.logging.Logger;
+
 /**
- * Producer für ACL Logger.
+ * Producer für JBoss Logger.
  *
  * @author dw
  */
 @ApplicationScoped
-public class LogProducer {
+public class LoggerProducer {
 
-  private static final Map<String, Log> LOG_MAP = new ConcurrentHashMap<>();
+  private static final Map<String, Logger> LOG_MAP = new ConcurrentHashMap<>();
 
   /**
    * Logger liefern.
@@ -30,7 +29,7 @@ public class LogProducer {
    * @return Logger
    */
   @Produces
-  Log getLog(InjectionPoint injectionPoint) {
+  Logger getLogger(InjectionPoint injectionPoint) {
     Bean<?> targetBean = null;
     if (injectionPoint != null) {
       targetBean = injectionPoint.getBean();
@@ -51,8 +50,8 @@ public class LogProducer {
     return getLog(targetClass);
   }
 
-  public static Log getLog(Class<?> targetClass) {
+  public static Logger getLog(Class<?> targetClass) {
     String name = targetClass != null ? targetClass.getName() : "UnnamedLogger";
-    return LOG_MAP.computeIfAbsent(name, k -> LogFactory.getLog(k));
+    return LOG_MAP.computeIfAbsent(name, k -> Logger.getLogger(k));
   }
 }

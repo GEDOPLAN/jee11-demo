@@ -16,13 +16,20 @@ Asynchronous methods::
 +
 `DeepThoughService` and `DeepThoughResource` are a simple demo.
 
+Scheduled methods::
+
+`ManagedScheduledExecutorService` is the EE encapsulation of the SE ScheduledExecutorService and allows scheduled execution of tasks in the EE environment.
+Virtual threads can be used with the help of `@ManagedScheduledExecutorDefinition` in the same way as shown above for `@ManagedExecutorDefinition`.
++
+Demo class: `TickerService`.
+
 Scheduled asynchronous methods::
 
 `@Asynchronous` supports schedules - specifying when the method invocation shall take place.
 +
-`TickerService` and `TickerResource` show the usage of `@Schedule`.
-+
-Not shown here: A schedule may be terminated by returning a completed `CompletableFuture` object.
+`SeminarService` and `SeminarResource` show the usage of `@Schedule`. +
+They simulate the daily attendance of a seminar participant in one of our JEE courses.
+After all topics have been learned after 4 asynchronous invocations, the schedule is completed by returning a completed future.
 
 CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
 

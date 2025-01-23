@@ -13,19 +13,15 @@ import de.gedoplan.showcase.service.StoveService;
 import de.gedoplan.showcase.util.ThreadUtil;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DefaultValue;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import org.apache.commons.logging.Log;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
+import org.jboss.logging.Logger;
 
 public abstract class AbstractBurgerResource {
 
@@ -49,28 +45,28 @@ public abstract class AbstractBurgerResource {
   MiseEnPlaceService miseEnPlaceService;
 
   @Inject
-  Log logger;
+  Logger logger;
 
   @Produces(MediaType.APPLICATION_JSON)
   public abstract List<String> getBurger(@QueryParam("bun") @DefaultValue("WHEAT") DoughType bunType, @QueryParam("patty") @DefaultValue("BEEF") PattyType pattyType) throws Exception;
 
   protected Dough supplyBunDough(DoughType doughType) {
-    this.logger.debug(String.format("Get dough (%s) on %s thread", doughType, ThreadUtil.getKindOfThread()));
+    this.logger.debugf("Get dough (%s) on %s thread", doughType, ThreadUtil.getKindOfThread());
     return this.doughService.supplyBunDough(doughType, 50);
   }
 
   protected Bun bakeBun(Dough dough) {
-    this.logger.debug(String.format("Bake bun (%s) on %s thread", dough.getType(), ThreadUtil.getKindOfThread()));
+    this.logger.debugf("Bake bun (%s) on %s thread", dough.getType(), ThreadUtil.getKindOfThread());
     return this.ovenService.bakeBun(dough);
   }
 
   protected Patty supplyPattyMeat(String meatType) {
-    this.logger.debug(String.format("Get patty (%s) on %s thread", meatType, ThreadUtil.getKindOfThread()));
+    this.logger.debugf("Get patty (%s) on %s thread", meatType, ThreadUtil.getKindOfThread());
     return this.meatService.supplyPattyMeat(meatType, 200);
   }
 
   protected Patty fryPattie(Patty patty) {
-    this.logger.debug(String.format("Fry patty (%s) on %s thread", patty.getType(), ThreadUtil.getKindOfThread()));
+    this.logger.debugf("Fry patty (%s) on %s thread", patty.getType(), ThreadUtil.getKindOfThread());
     return this.stoveService.fryPattie(patty);
   }
 }

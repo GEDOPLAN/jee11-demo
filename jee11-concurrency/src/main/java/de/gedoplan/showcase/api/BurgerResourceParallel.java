@@ -1,24 +1,15 @@
 package de.gedoplan.showcase.api;
 
 import de.gedoplan.showcase.domain.Bun;
-import de.gedoplan.showcase.domain.Dough;
 import de.gedoplan.showcase.domain.DoughType;
 import de.gedoplan.showcase.domain.Patty;
 import de.gedoplan.showcase.domain.PattyType;
-import de.gedoplan.showcase.service.DoughService;
-import de.gedoplan.showcase.service.MeatService;
-import de.gedoplan.showcase.service.MiseEnPlaceService;
-import de.gedoplan.showcase.service.OvenService;
-import de.gedoplan.showcase.service.StoveService;
 import de.gedoplan.showcase.service.concurrency.UseVirtualIfSupported;
-import de.gedoplan.showcase.util.ThreadUtil;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import jakarta.annotation.Resource;
-import jakarta.enterprise.concurrent.ManagedExecutorDefinition;
 import jakarta.enterprise.concurrent.ManagedExecutorService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -28,9 +19,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-
-import org.apache.commons.logging.Log;
-import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
 @Path("par/burger")

@@ -11,14 +11,14 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import org.apache.commons.logging.Log;
+import org.jboss.logging.Logger;
 
 @ApplicationScoped
 @Path("mock/dough")
 public class DoughResourceMock {
 
   @Inject
-  Log logger;
+  Logger logger;
 
   @Inject
   SlowDownService slowDownService;

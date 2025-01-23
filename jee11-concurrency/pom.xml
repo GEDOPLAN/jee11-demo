@@ -30,8 +30,8 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
