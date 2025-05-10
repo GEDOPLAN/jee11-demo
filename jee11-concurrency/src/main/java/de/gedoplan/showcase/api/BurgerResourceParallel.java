@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import jakarta.annotation.Resource;
 import jakarta.enterprise.concurrent.ManagedExecutorService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -24,7 +25,7 @@ import jakarta.ws.rs.core.MediaType;
 @Path("par/burger")
 public class BurgerResourceParallel extends AbstractBurgerResource {
 
-//  @Resource(lookup = "java:comp/Executor")
+  // @Resource(lookup = "java:comp/UseVirtualIfSupportedExecutor")
   @Inject @UseVirtualIfSupported
   ManagedExecutorService executor;
 

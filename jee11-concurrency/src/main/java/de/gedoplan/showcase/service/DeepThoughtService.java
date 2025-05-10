@@ -17,7 +17,7 @@ import jakarta.enterprise.context.ApplicationScoped;
  *
  */
 @ApplicationScoped
-public class DeepThoughService {
+public class DeepThoughtService {
 
   @Asynchronous
   public CompletableFuture<String> getAnswerToQuestionAboutLifeUniverseAndEverything() {
@@ -27,6 +27,6 @@ public class DeepThoughService {
       // ignore
     }
 
-    return Asynchronous.Result.complete("Zweiundvierzig");
+    return Asynchronous.Result.complete("Forty-two");
   }
 }

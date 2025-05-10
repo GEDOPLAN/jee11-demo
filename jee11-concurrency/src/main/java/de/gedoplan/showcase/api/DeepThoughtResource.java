@@ -1,6 +1,6 @@
 package de.gedoplan.showcase.api;
 
-import de.gedoplan.showcase.service.DeepThoughService;
+import de.gedoplan.showcase.service.DeepThoughtService;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -19,7 +19,7 @@ import org.jboss.logging.Logger;
 public class DeepThoughtResource {
 
   @Inject
-  DeepThoughService deepThoughService;
+  DeepThoughtService deepThoughService;
 
   @Inject
   Logger logger;

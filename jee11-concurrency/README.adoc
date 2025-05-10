@@ -1,5 +1,9 @@
 = New in JEE 11 / Concurrency 3.1
 
+CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
+
+NOTE: Run the application with `mvn liberty:dev`.
+
 Virtual threads in `ManagedExecutorService`::
 
 `@ManagedExecutorDefinition` can be used to declare managed executors using virtual threads. +
@@ -9,19 +13,25 @@ Managed executors may be injected with `@Inject`, using qualifiers for selection
 For demonstration a former GEDOPLAN Expertenkreis Java demo producing (virtual) burgers has now been implemented with JEE 11: +
 `BurgerResourceParallel` uses a `ManagedExecutor` defined by `@ManagedExecutorDefinition` on `ExecutorDefinitions`. +
 If run on a JVM 21+, virtual threads are used for the parallel tasks.
++
+Request a burger production by running `curl localhost:8080/par/burger` 
+and watch the server log for `on virtual thread` if running on Java 21+ or `on platform thread` if running on Java 17.
 
 Asynchronous methods::
 
 `@Asynchronous` has finally arrived in Concurrency - originating from the EJB spec and being misplaced in MicroProfile Fault Tolerance for a while. 
 +
-`DeepThoughService` and `DeepThoughResource` are a simple demo.
+`DeepThoughtService` and `DeepThoughtResource` are a simple demo.+
++
+Run `curl localhost:8080/deep-thought` and watch the server log.
+The service is called asynchronously and returns its result after a few seconds.
 
 Scheduled methods::
 
 `ManagedScheduledExecutorService` is the EE encapsulation of the SE ScheduledExecutorService and allows scheduled execution of tasks in the EE environment.
 Virtual threads can be used with the help of `@ManagedScheduledExecutorDefinition` in the same way as shown above for `@ManagedExecutorDefinition`.
 +
-Demo class: `TickerService`.
+The demo class `TickerService` writes `Tick!` once per minute into the server log..
 
 Scheduled asynchronous methods::
 
@@ -30,9 +40,8 @@ Scheduled asynchronous methods::
 `SeminarService` and `SeminarResource` show the usage of `@Schedule`. +
 They simulate the daily attendance of a seminar participant in one of our JEE courses.
 After all topics have been learned after 4 asynchronous invocations, the schedule is completed by returning a completed future.
-
-CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
-
-NOTE: Run the application with `mvn liberty:dev`.
++
+You can "enrol" a seminar participant by `curl -X POST localhost:8080/seminar -d 'Duke'`.
+Watch the server log for `Duke` learning JEE in 4 days.
 
 
