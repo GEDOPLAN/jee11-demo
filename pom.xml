@@ -29,7 +29,7 @@
 		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
 		<openliberty.version>25.0.0.1-beta</openliberty.version>
 
-		<wildfly.version>35.0.0.Final</wildfly.version>
+		<wildfly.version>36.0.0.Final</wildfly.version>
 		<wildfly.suffix>-preview</wildfly.suffix>
 	</properties>
 
@@ -38,12 +38,12 @@
 			<dependency>
 				<groupId>jakarta.platform</groupId>
 				<artifactId>jakarta.jakartaee-api</artifactId>
-				<version>10.0.0</version>
+				<version>11.0.0-RC1</version>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.platform</groupId>
 				<artifactId>jakarta.jakartaee-web-api</artifactId>
-				<version>11.0.0-M4</version>
+				<version>11.0.0</version>
 			</dependency>
 
 			<dependency>
@@ -56,19 +56,19 @@
 			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
-				<version>1.2</version>
+				<version>1.3.5</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.jboss.logging</groupId>
 				<artifactId>jboss-logging</artifactId>
-				<version>3.5.3.Final</version>
+				<version>3.6.1.Final</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.32</version>
+				<version>1.18.38</version>
 				<scope>compile</scope>
 			</dependency>
 		</dependencies>

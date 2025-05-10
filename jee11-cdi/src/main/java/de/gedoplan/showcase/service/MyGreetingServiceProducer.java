@@ -8,7 +8,10 @@ import jakarta.interceptor.Interceptor;
 
 @ApplicationScoped
 public class MyGreetingServiceProducer {
-  @Produces @Alternative @Priority(Interceptor.Priority.APPLICATION + 500) GreetingService produce() {
+  @Produces
+  @Alternative
+  @Priority(Interceptor.Priority.APPLICATION + 500)
+  GreetingService produce() {
     return new GreetingService() {
       @Override
       public String sayHello() {

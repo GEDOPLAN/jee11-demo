@@ -37,8 +37,6 @@
           <feature-pack-location>wildfly${wildfly.suffix}@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
           <layers>
             <layer>jaxrs-server</layer>
-            <layer>microprofile-platform</layer>
-            <layer>microprofile-rest-client</layer>
           </layers>
           <cli-sessions>
             <cli-session>

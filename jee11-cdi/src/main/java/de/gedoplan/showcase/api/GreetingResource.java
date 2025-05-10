@@ -10,7 +10,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 @ApplicationScoped
-@Path("hello")
+@Path("greeting")
 public class GreetingResource {
 
   @Inject
