@@ -27,7 +27,7 @@
 		<skipTests>true</skipTests>
 
 		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
-		<openliberty.version>25.0.0.1-beta</openliberty.version>
+		<openliberty.version>25.0.0.5-beta</openliberty.version>
 
 		<wildfly.version>36.0.0.Final</wildfly.version>
 		<wildfly.suffix>-preview</wildfly.suffix>
