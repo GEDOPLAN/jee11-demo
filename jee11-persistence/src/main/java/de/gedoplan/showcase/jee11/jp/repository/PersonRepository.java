@@ -7,7 +7,6 @@ import de.gedoplan.showcase.jee11.jp.model.Person_;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 public class PersonRepository {
@@ -46,7 +45,6 @@ public class PersonRepository {
     .getSingleResult();
   }
 
-  @Transactional
   public void save(Person person) {
     entityManager.persist(person);
   }
