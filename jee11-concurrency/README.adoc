@@ -1,6 +1,6 @@
 = New in JEE 11 / Concurrency 3.1
 
-CAUTION: This demo runs on Open Liberty only (currently `25.0.0.1-beta`).
+CAUTION: This demo runs on Open Liberty only.
 
 NOTE: Run the application with `mvn liberty:dev`.
 
