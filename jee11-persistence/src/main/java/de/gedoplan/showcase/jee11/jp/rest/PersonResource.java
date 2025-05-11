@@ -1,25 +1,28 @@
 package de.gedoplan.showcase.jee11.jp.rest;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.function.BiConsumer;
+
 import de.gedoplan.showcase.jee11.jp.model.Person;
 import de.gedoplan.showcase.jee11.jp.model.Status;
 import de.gedoplan.showcase.jee11.jp.repository.PersonRepository;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Valid;
-import jakarta.validation.Validator;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 import lombok.extern.java.Log;
-import org.hibernate.query.sqm.spi.JdbcParameterBySqmParameterAccess;
-
-import java.time.Year;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.function.BiConsumer;
 
 @Log
 @Path("person")
@@ -37,7 +40,7 @@ public class PersonResource {
   public List<Person> getPersons(@DefaultValue("default") @QueryParam("type") String type) {
     return switch (type) {
       case "short" -> personRepository.findAllShortSyntax();
-      case "save" -> personRepository.findAllTypeSave();
+      case "safe" -> personRepository.findAllTypeSafe();
       case "default" -> personRepository.findAll();
       default -> Collections.emptyList();
     };

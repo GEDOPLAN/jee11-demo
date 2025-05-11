@@ -1,0 +1,31 @@
+= New in JEE 11 / Persistence 3.2
+
+CAUTION: This demo runs on WildFly only (because we were lazy and didn't configure Openen Liberty ;-).
+
+NOTE: Run the application with `mvn wildfly-jar:dev-watch`.
+
+Embrace Records::
+
+Records can be used as embeddables. This is shown in `Person#address`.
+
+Query enhancements::
+
+In simple cases the `SELECT` clause in JPQL can be left out - see `PersonRepository#findAllShortSyntax`.
++
+Named Queries can be referenced in a type-safe manner - see `PersonRepository#findAllTypeSafe`.
++
+The new `Query` method `getSingleResultOrNull` can be used to retrieve single values
+without throwing a `NoResultException` if not found - see `PersonRepository#getRegistrationYear`. 
+
+Programmatic persistence unit definition::
+
+Instead of using `persistence.xml` a persistence unit can be defined by api - see `EntityManagerProducer`.
+
+Mapping enhancements::
+
+There are many small enhancements and clarifications for mapping attributes to the database, including:
+
+* `java.time.Year` can be used as persistents attribute - see `Person#yearOfBirth`.
+* `enum` values can bring their own database values (like an implicit converter) - see `Status#shortcut`.
+
+NOTE: There are many, many more small enhancements not shown in this demo - see the revision history in the specification!

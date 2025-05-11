@@ -1,14 +1,13 @@
 package de.gedoplan.showcase.jee11.jp.repository;
 
+import java.util.List;
+
 import de.gedoplan.showcase.jee11.jp.model.Person;
 import de.gedoplan.showcase.jee11.jp.model.Person_;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
-
-import java.time.Year;
-import java.util.List;
 
 @ApplicationScoped
 public class PersonRepository {
@@ -23,7 +22,7 @@ public class PersonRepository {
     return entityManager.createQuery("FROM Person", Person.class).getResultList();
   }
 
-  public List<Person> findAllTypeSave() {
+  public List<Person> findAllTypeSafe() {
     return entityManager.createNamedQuery(Person_.QUERY_PERSON_FIND_ALL, Person.class).getResultList();
   }
 
@@ -39,6 +38,12 @@ public class PersonRepository {
         .createQuery("SELECT p FROM Person p WHERE p.name = :name", Person.class)
         .setParameter("name", name)
         .getSingleResultOrNull();
+  }
+
+  public long count() {
+    return entityManager
+    .createQuery("select count(p) from Person p", Long.class)
+    .getSingleResult();
   }
 
   @Transactional

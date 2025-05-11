@@ -1,6 +1,5 @@
 package de.gedoplan.showcase.jee11.jp.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

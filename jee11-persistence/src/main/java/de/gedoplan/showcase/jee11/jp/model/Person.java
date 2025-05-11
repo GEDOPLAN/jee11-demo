@@ -1,20 +1,28 @@
 package de.gedoplan.showcase.jee11.jp.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.Year;
+import java.util.Objects;
+
+import jakarta.persistence.CheckConstraint;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.List;
-import java.util.Objects;
-
 @Getter
 @Setter
+@Builder
 @Entity
 @NamedQuery(name = "Person.findAll", query = "FROM Person")
 public class Person {
@@ -42,9 +50,6 @@ public class Person {
 
   @Valid
   Address address;
-
-  @OneToMany(mappedBy = Note_.PERSON)
-  List<Note> notes;
 
   @PrePersist
   void prePersist() {
