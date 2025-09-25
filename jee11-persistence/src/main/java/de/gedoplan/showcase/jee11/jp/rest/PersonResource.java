@@ -24,7 +24,7 @@ import jakarta.ws.rs.core.UriInfo;
 import lombok.extern.java.Log;
 
 @Log
-@Path("person")
+@Path("persons")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class PersonResource {

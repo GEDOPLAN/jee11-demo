@@ -27,9 +27,9 @@
 		<skipTests>true</skipTests>
 
 		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
-		<openliberty.version>25.0.0.5-beta</openliberty.version>
+		<openliberty.version>25.0.0.10-beta</openliberty.version>
 
-		<wildfly.version>36.0.0.Final</wildfly.version>
+		<wildfly.version>37.0.1.Final</wildfly.version>
 		<wildfly.suffix>-preview</wildfly.suffix>
 	</properties>
 
@@ -82,7 +82,7 @@
 				<plugin>
 					<groupId>io.openliberty.tools</groupId>
 					<artifactId>liberty-maven-plugin</artifactId>
-					<version>3.10.3</version>
+					<version>3.11.5</version>
 				</plugin>
 				<plugin>
 					<groupId>org.wildfly.plugins</groupId>

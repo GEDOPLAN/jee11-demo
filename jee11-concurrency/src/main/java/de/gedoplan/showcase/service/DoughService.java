@@ -1,15 +1,14 @@
 package de.gedoplan.showcase.service;
 
-import de.gedoplan.showcase.domain.Dough;
-import de.gedoplan.showcase.domain.DoughType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+import de.gedoplan.showcase.domain.Dough;
+import de.gedoplan.showcase.domain.DoughType;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import java.util.concurrent.CompletionStage;
 
 @RegisterRestClient(configKey = "DoughService")
 @Path("dough")

@@ -1,16 +1,14 @@
 package de.gedoplan.showcase.api;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 import de.gedoplan.showcase.domain.Bun;
 import de.gedoplan.showcase.domain.DoughType;
 import de.gedoplan.showcase.domain.Patty;
 import de.gedoplan.showcase.domain.PattyType;
 import de.gedoplan.showcase.service.concurrency.UseVirtualIfSupported;
-
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
-import jakarta.annotation.Resource;
 import jakarta.enterprise.concurrent.ManagedExecutorService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

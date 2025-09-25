@@ -10,12 +10,19 @@ Records can be used as embeddables. This is shown in `Person#address`.
 
 Query enhancements::
 
-In simple cases the `SELECT` clause in JPQL can be left out - see `PersonRepository#findAllShortSyntax`.
+In simple cases the `SELECT` clause in JPQL can be left out - see `PersonRepository#findAllShortSyntax`. +
+Try it with `curl 'localhost:8080/persons?type=short'`!
 +
-Named Queries can be referenced in a type-safe manner - see `PersonRepository#findAllTypeSafe`.
+Named Queries can be referenced in a type-safe manner - see `PersonRepository#findAllTypeSafe`. +
+Try it with `curl 'localhost:8080/persons?type=safe'`!
 +
 The new `Query` method `getSingleResultOrNull` can be used to retrieve single values
-without throwing a `NoResultException` if not found - see `PersonRepository#getRegistrationYear`. 
+without throwing a `NoResultException` if not found - see `PersonRepository#findByName`. +
+Try it with 
+
+* `curl 'localhost:8080/persons/Dagobert%20Duck'` (found case) and
+* `curl 'localhost:8080/persons/xyz'` (not found case)
+
 
 Programmatic persistence unit definition::
 
@@ -25,7 +32,7 @@ Mapping enhancements::
 
 There are many small enhancements and clarifications for mapping attributes to the database, including:
 
-* `java.time.Year` can be used as persistents attribute - see `Person#yearOfBirth`.
+* `java.time.Year` can be used as persistens attribute - see `Person#yearOfBirth`.
 * `enum` values can bring their own database values (like an implicit converter) - see `Status#shortcut`.
 
 NOTE: There are many, many more small enhancements not shown in this demo - see the revision history in the specification!

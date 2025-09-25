@@ -1,16 +1,13 @@
 package de.gedoplan.showcase.api;
 
-import de.gedoplan.showcase.service.SeminarService;
+import org.jboss.logging.Logger;
 
+import de.gedoplan.showcase.service.SeminarService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.QueryParam;
-
-import org.jboss.logging.Logger;
 
 @Path("seminar")
 @ApplicationScoped

@@ -45,14 +45,14 @@
     <finalName>${project.artifactId}</finalName>
 
     <plugins>
-      <!-- 
-        WildFly does not support @ManagedExecutorDefinition(virtual=true) yet.
-        Please use OpenLiberty instead (mvn liberty:dev).
-      -->
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-jar-maven-plugin</artifactId>
         <configuration>
+          <!-- 
+            WildFly does not support @ManagedExecutorDefinition(virtual=true) yet.
+            Please use OpenLiberty instead (mvn liberty:dev).
+          -->
           <skip>true</skip>
           <feature-pack-location>wildfly${wildfly.suffix}@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
           <layers>

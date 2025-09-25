@@ -1,14 +1,13 @@
 package de.gedoplan.showcase.service;
 
-import de.gedoplan.showcase.domain.Patty;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+import de.gedoplan.showcase.domain.Patty;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import java.util.concurrent.CompletionStage;
 
 @RegisterRestClient(configKey = "MeatService")
 @Path("meat")
