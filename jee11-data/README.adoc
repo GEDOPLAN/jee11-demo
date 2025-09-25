@@ -1,0 +1,56 @@
+= New in JEE 11: Data 1.0
+
+CAUTION: This demo runs on WildFly only (because we were lazy and didn't configure Open Liberty ;-).
+
+NOTE: Run the application with `mvn wildfly-jar:dev-watch`.
+
+Generated Repositories::
+
+Repositories can be defined as interfaces extending `CrudRepository` - see `PersonRepository`.
+There are different levels of base interfaces: `DataRepository` -> `BasicRepository` -> `CrudRepository`.
+
+`CrudRepository` contains basic CRUD methods including pagination and can be easily enhanced by
+lifecycle and query methods. There are a few examples to be tried out:
+
+[%autowidth]
+|===
+|Feature |repository method|REST call
+
+|Retrieve all entries
+|`BasicRepository#findAll`
+|`curl localhost:8080/persons`
+
+|Read entry by id
+|`BasicRepository#findById`
+|`curl localhost:8080/persons/1`
+
+|Insert new entry
+|`CrudRepository#insert`
+|`curl -X POST localhost:8080/persons -H 'content-type: application/json' -d '{"name": "Mustermann", "firstname": "Max"}' -i`
+
+|Read entry by custom finder
+|`PersonRepository#findByName`
+|`curl localhost:8080/persons/byname/Mustermann`
+
+|Paginated query (offset based)
+|`BasicRepository#findAll(PageRequest,...)`
+|`curl localhost:8080/persons/page`
+
+|===
+
+There are many more features not shown in our demo, e. g. key based pagination. Please refer to the specification documents ;-).
+
+Things to be aware of::
+
+Jakarta Data uses a stateless aproach (whereas Jakarta Persistence has a stateful behaviour). That means:
+
+* Lazy loading does not work
+* Entity creation has to be done in the right order - even in the same transaction (see. `InitPublisherDemoDataService#createDemoData`)
+
+Jakarta Data is not required to support
+
+* inheritance
+* embeddables
+* associations
+
+

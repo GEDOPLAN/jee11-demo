@@ -1,0 +1,1 @@
+/subsystem=datasources/data-source=showcase:add(jndi-name=java:/jdbc/showcase, connection-url="jdbc:h2:~/h2/showcase;AUTO_SERVER=TRUE", driver-name=h2, user-name=showcase, password=showcase)

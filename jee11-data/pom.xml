@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>de.gedoplan.showcase</groupId>
+    <artifactId>jee11-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>jee11-data</artifactId>
+
+  <packaging>war</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>jakarta.platform</groupId>
+      <artifactId>jakarta.jakartaee-web-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.orm</groupId>
+      <artifactId>hibernate-processor</artifactId>
+      <version>${hibernate.version}</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.wildfly.plugins</groupId>
+        <artifactId>wildfly-jar-maven-plugin</artifactId>
+        <configuration>
+          <feature-pack-location>
+            wildfly${wildfly.suffix}@maven(org.jboss.universe:community-universe)#${wildfly.version}</feature-pack-location>
+          <layers>
+            <layer>base-server</layer>
+            <layer>core-tools</layer>
+            <layer>logging</layer>
+            <layer>web-console</layer>
+            <layer>web-server</layer>
+            <layer>jaxrs</layer>
+            <layer>jpa</layer>
+            <layer>h2-datasource</layer>
+            <layer>bean-validation</layer>
+            <layer>ee-concurrency</layer>
+          </layers>
+          <cli-sessions>
+            <cli-session>
+              <script-files>
+                <script>src/main/wildfly/cli/datasource.cli</script>
+                <script>src/main/wildfly/cli/logging.cli</script>
+                <script>src/main/wildfly/cli/encoding.cli</script>
+              </script-files>
+            </cli-session>
+          </cli-sessions>
+          <excluded-layers>
+            <layer>deployment-scanner</layer>
+          </excluded-layers>
+          <plugin-options>
+            <ignore-not-excluded-layers>true</ignore-not-excluded-layers>
+            <jboss-maven-dist />
+          </plugin-options>
+          <hollow-jar>true</hollow-jar>
+          <output-file-name>wildfly-bootable.jar</output-file-name>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>io.openliberty.tools</groupId>
+        <artifactId>liberty-maven-plugin</artifactId>
+        <configuration>
+          <!-- There is no liberty server  definition yet ... -->
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.1</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <annotationProcessorPath>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </annotationProcessorPath>
+            <annotationProcessorPath>
+              <groupId>org.hibernate.orm</groupId>
+              <artifactId>hibernate-processor</artifactId>
+              <version>${hibernate.version}</version>
+            </annotationProcessorPath>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

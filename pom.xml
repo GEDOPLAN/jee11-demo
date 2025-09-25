@@ -8,6 +8,7 @@
 	<modules>
 		<module>jee11-cdi</module>
 		<module>jee11-concurrency</module>
+		<module>jee11-data</module>
 		<module>jee11-persistence</module>
 	</modules>
 
@@ -27,6 +28,9 @@
 		<skipTests>true</skipTests>
 
 		<hibernate.version>7.1.1.Final</hibernate.version>
+		<jakartaee.version>11.0.0</jakartaee.version>
+    <lombok.version>1.18.38</lombok.version>
+    <microprofile.version>7.0</microprofile.version>
 
 		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
 		<openliberty.version>25.0.0.10-beta</openliberty.version>
@@ -40,18 +44,18 @@
 			<dependency>
 				<groupId>jakarta.platform</groupId>
 				<artifactId>jakarta.jakartaee-api</artifactId>
-				<version>11.0.0-RC1</version>
+				<version>${jakartaee.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>jakarta.platform</groupId>
 				<artifactId>jakarta.jakartaee-web-api</artifactId>
-				<version>11.0.0</version>
+				<version>${jakartaee.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.eclipse.microprofile</groupId>
 				<artifactId>microprofile</artifactId>
-				<version>7.0</version>
+				<version>${microprofile.version}</version>
 				<type>pom</type>
 			</dependency>
 
@@ -70,7 +74,7 @@
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
-				<version>1.18.38</version>
+				<version>${lombok.version}</version>
 				<scope>compile</scope>
 			</dependency>
 		</dependencies>

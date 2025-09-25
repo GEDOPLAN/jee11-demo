@@ -1,6 +1,6 @@
 = New in JEE 11 / Persistence 3.2
 
-CAUTION: This demo runs on WildFly only (because we were lazy and didn't configure Openen Liberty ;-).
+CAUTION: This demo runs on WildFly only (because we were lazy and didn't configure Open Liberty ;-).
 
 NOTE: Run the application with `mvn wildfly-jar:dev-watch`.
 
