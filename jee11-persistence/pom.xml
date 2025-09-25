@@ -13,10 +13,6 @@
 
 	<artifactId>jee11-persistence</artifactId>
 
-	<properties>
-		<hibernate.version>7.0.0.Beta1</hibernate.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>jakarta.platform</groupId>
@@ -81,11 +77,12 @@
 					<output-file-name>wildfly-bootable.jar</output-file-name>
 				</configuration>
 			</plugin>
-			<!-- There is no liberty server  definition yet ... -->
+      
 			<plugin>
-				<groupId>io.openliberty.tools</groupId>
+        <groupId>io.openliberty.tools</groupId>
 				<artifactId>liberty-maven-plugin</artifactId>
 				<configuration>
+          <!-- There is no liberty server  definition yet ... -->
 					<skip>true</skip>
 				</configuration>
 			</plugin>

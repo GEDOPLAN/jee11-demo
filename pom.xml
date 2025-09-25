@@ -26,6 +26,8 @@
 
 		<skipTests>true</skipTests>
 
+		<hibernate.version>7.1.1.Final</hibernate.version>
+
 		<openliberty.groupId>io.openliberty.beta</openliberty.groupId>
 		<openliberty.version>25.0.0.10-beta</openliberty.version>
 
